@@ -1,0 +1,38 @@
+entity Task {
+	id Int required,
+	isDone Boolean,
+    title String,
+    description String
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity ListOfTasks{
+	id Int required,
+    task Task
+}
+
+entity User {
+	id Int required,
+    name String,
+    list ListOfTask
+}
+
+relationship ManyToOne{
+	Task{id} to ListOfTasks
+}
+
+relationship ManyToOne{
+	User{id} to ListOfTasks
+}
+
+
+
+// Set pagination options
+paginate Task, User, ListOfTasks with infinite-scroll
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
